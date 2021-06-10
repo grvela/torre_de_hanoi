@@ -15,18 +15,10 @@ Disco* criarDisco(int tam){
     disco -> TamDisco = tam + '0';
     disco -> next = criarDisco(tam - 1);
   }
-  // printf("criarDisco: %p\ntamDisco: %c\n", disco, disco -> TamDisco);
   return disco;
 }
 
 Pino* criarPino(){
-  // Pino *pointer, pino;
-  // pino.numDiscos = '0';
-  // pino.top = criarDisco(0);
-  // pointer = &pino;
-  // printf("criar Pino: %p\n", pointer);
-  // return pointer;
-  //comparar diferanca mais tarde
   Pino *pino;
   pino = (Pino*)malloc(sizeof(Pino));
   pino -> numDiscos = '0';
@@ -42,26 +34,16 @@ Pino** criarPinos(int n){
   return pinos;
 }
 
-void imprimir(Pino **pinos, int numPinos, int numDiscos){
-  
-}
-
 int moverDisco(Pino **pinos, int pinoOrigem, int pinoDestino){
+
   Disco *discoOrigem, *discoDestino;
   int tamDiscoOrigem, tamDiscoDestino;
 
-  if(!(pinoOrigem >= 3 && pinoOrigem <= 5)
-      || !(pinoDestino >= 3 && pinoDestino <= 5)){
-    return 0;
-  }
-
   if((pinos[pinoOrigem] -> numDiscos) == '0'){
-    //pino de origem n tem disco
     return 0;
   }
 
   if(pinos[pinoDestino] -> numDiscos != '0'){
-    //pino de destino tem disco
     discoOrigem = pinos[pinoOrigem] -> top;
     discoDestino = pinos[pinoDestino] -> top;
           
@@ -75,14 +57,18 @@ int moverDisco(Pino **pinos, int pinoOrigem, int pinoDestino){
   return 1;
 }
 
-// Disco* pop(Pino *pino){
+void imprimir(Pino **pinos, int numPinos, int numDiscos){
+  
+}
 
-// }
+//Disco* pop(Pino *pino){
 
-// void push(Pino *pino, Disco *disco){
+//}
 
-// }
+void push(Pino *pino, Disco *disco){
 
-// void excluirPino(Pino *pino){
+}
 
-// }
+void excluirPino(Pino *pino){
+
+}
