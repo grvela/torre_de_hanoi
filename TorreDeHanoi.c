@@ -60,38 +60,25 @@ int moverDisco(Pino **pinos, int pinoOrigem, int pinoDestino){
 
 //verificar a inversão, pilha, logica de jogo, ponteiro descrecente
 void imprimir(Pino **pinos, int numPinos, int numDiscos){
-  
   Disco *disco;
-
   int numDiscosPino, linhaTemDisco, colunaHaste;
   int tamBase, tamHaste, tamDisco;
   int esquerdaPivo, direitaPivo;
-
   tamBase = 2*numDiscos + 3;
   tamHaste = numDiscos;
   colunaHaste = (tamBase - 1)/2;
-  printf("tamBase: %d, tamHaste: %d, colunaHaste: %d\n", tamBase, tamHaste, colunaHaste);
-
+  //printf("tamBase: %d, tamHaste: %d, colunaHaste: %d\n", tamBase, tamHaste, colunaHaste);
   for(int p = 0; p < numPinos; p++){
-
     numDiscosPino = (int)(pinos[p] -> numDiscos) - '0';
     linhaTemDisco = (tamHaste) - numDiscosPino;
-
     disco = pinos[p] -> top;
-
-    printf("numDiscosPino: %d, linhaTemDisco: %d\n", numDiscosPino, linhaTemDisco);
-
+    //printf("numDiscosPino: %d, linhaTemDisco: %d\n", numDiscosPino, linhaTemDisco);
     for(int i = 0; i < tamHaste; i++){
-
       for(int j = 0; j < tamBase; j++){
-
         if(i >= linhaTemDisco){
-
           tamDisco = (int)(disco -> TamDisco) - '0';
-          
           esquerdaPivo = colunaHaste - tamDisco - 1;
           direitaPivo = colunaHaste + tamDisco;
-
           if(j == colunaHaste){
             printf("|");
           }else{
@@ -99,28 +86,20 @@ void imprimir(Pino **pinos, int numPinos, int numDiscos){
             printf("_");
             }else printf(" ");
           }
-          
-
-          
-
         }else{
-
           if(j != colunaHaste) printf(" ");
           else printf("|");
-
         }
       }
       disco = disco -> next;
       printf("\n");
     }
-
     for(int j = 0; j < tamBase; j++){
       if(j != colunaHaste) printf("_");
       else printf("|");
     }
     printf("\n");
   }
-
 }
 
 //Disco* pop(Pino *pino){
