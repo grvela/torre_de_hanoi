@@ -58,7 +58,45 @@ int moverDisco(Pino **pinos, int pinoOrigem, int pinoDestino){
 }
 
 void imprimir(Pino **pinos, int numPinos, int numDiscos){
-  
+  Disco *disco;
+  int numDiscosPino, linhaTemDisco, colunaHaste;
+  int tamBase, tamHaste, tamDisco;
+
+  tamBase = 2*numDiscos + 3;
+  tamHaste = numDiscos + 1;
+
+  for(int p = 0; p < numPinos; p++){
+
+    numDiscosPino = (int)(pinos[p] -> numDiscos) - '0';
+    linhaTemDisco = (tamHaste - 1) - numDiscosPino;
+    colunaHaste = (tamBase - 1)/2;
+    disco = pinos[p] -> top;
+    //resolver problema do ponteiro
+    for(int i = 0; i < tamHaste - 1; i++){
+
+      for(int j = 0; j < tamBase; j++){
+        if(i < linhaTemDisco){
+          if(j != colunaHaste) printf(" ");
+          else printf("|");
+        }else{
+          tamDisco = (int)(disco -> TamDisco) - '0';
+          if(tamDisco != 0){
+            if((j >= colunaHaste - tamDisco) || (j > colunaHaste && j <= colunaHaste + tamDisco) ){
+            printf("_");
+            }else printf(" ");
+          }
+        }
+      }
+      disco = disco -> next;
+      printf("\n");
+    }
+    for(int j = 0; j < tamBase; j++){
+      if(j != colunaHaste) printf("_");
+      else printf("|");
+    }
+    printf("\n");
+  }
+
 }
 
 //Disco* pop(Pino *pino){
