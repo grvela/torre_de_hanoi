@@ -22,14 +22,20 @@ bool validaMovimento(int n, int a, int b){
 }
 
 Pino** iniciaJogo(int n, int m){
-
   Pino **pinos, *pinoInicial;
-  
-  pinos = criarPinos(n);
+  Disco *discoTopo;
 
+  pinos = criarPinos(n);
   pinoInicial = pinos[0];
   pinoInicial -> numDiscos = m + '0';
-  pinoInicial -> top = criarDisco(m);
+  pinoInicial -> top = criarDisco(0);
+  discoTopo = pinoInicial -> top;
+  
+  for(int i = m; i >= 1; i--){
+    discoTopo = insereDiscos(discoTopo, i);
+  }
+
+  pinoInicial -> top = discoTopo;
 
   return pinos;
 }
@@ -46,7 +52,6 @@ int main(void) {
   
   imprimir(pinos, n, m);
   
-
-
+  
   return 0;
 }

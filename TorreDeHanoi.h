@@ -20,6 +20,7 @@ int moverDisco(Pino **pinos, int pinoOrigem, int pinoDestino);
 void imprimir(Pino **pinos, int numPinos, int numDiscos);
 Pino* criarPino();
 Disco* criarDisco(int tam);
+Disco* insereDiscos(Disco *disco, int tam);
 Disco* pop(Pino *pino);
 void push(Pino *pino, Disco *disco);
 void excluirPino(Pino *pino);
