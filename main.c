@@ -5,6 +5,9 @@
 int totalJogadas = 0;
 
 int validaEntrada(char c){
+  /*
+  Esta função valida o range da entrada para pinos e discos, retornando o numero da entrada caso o valor passe na condição
+  */
   int n;
   if(c == 'p') printf("Insira a quantidade de pinos: [3..5] ");
   else printf("Insira a quantidade de discos: [3..5] ");
@@ -17,6 +20,9 @@ int validaEntrada(char c){
 }
 
 bool validaMovimento(int n, int a, int b){
+  /*
+  Esta função valida o movimento dos discos entre os pinos, retornando verdadeiro caso a entrada esteja no range de pinos e falso caso contrario
+  */
   if( a != b && (b >= 1 && b <= n) && (a >= 1 && a <= n)){
     return true;
   }
@@ -25,6 +31,10 @@ bool validaMovimento(int n, int a, int b){
 }
 
 Pino** iniciaJogo(int n, int m){
+  /*
+  Esta função starta o jogo da torre de hanoi, criando os pinos e alocando os discos no pino principal 
+  */
+
   Pino **pinos, *pinoInicial;
   Disco *discoTopo;
 
@@ -43,11 +53,14 @@ Pino** iniciaJogo(int n, int m){
   return pinos;
 }
 
-bool checaVitoria(Pino **pinos, int n){
-  char numDiscos =  n + '0';
+bool checaVitoria(Pino **pinos, int numDiscos, int numPinos){
+  /*
+  Esta função checa se o usuario ja venceu o jogo, baseando-se na condição de que o primeiro pino deverá estar vazio e um entre os outros pinos deverá conter todos os discos
+  */
+  char numDiscosC =  numDiscos + '0';
   if(pinos[0] -> numDiscos == '0'){
-    for(int i = 1; i < n; i++){
-      if(pinos[i] -> numDiscos == numDiscos){
+    for(int i = 1; i < numPinos; i++){
+      if(pinos[i] -> numDiscos == numDiscosC){
         return true;
       }
     }
@@ -68,8 +81,8 @@ int main(void) {
   pinos = iniciaJogo(numPinos, numDiscos);
   
   imprimir(pinos, numPinos, numDiscos);
-  
-  while(!checaVitoria(pinos, numDiscos)){
+
+  while(!checaVitoria(pinos, numDiscos, numPinos)){
     printf("Insira os pinos de origem e de destino: ");
     scanf("%d %d", &pinoOrigem, &pinoDestino);
   
@@ -90,6 +103,11 @@ int main(void) {
     }
     imprimir(pinos, numPinos, numDiscos);
   }
+
+  for(int i = 0; i < numPinos; i++){
+    excluirPino(pinos[i]);
+  }
+
   printf("PARABENS VOCE CONSEGUIU\n");
   printf("TOTAL DE JOGADAS: %d\n", totalJogadas);
   return 0;

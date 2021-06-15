@@ -65,7 +65,21 @@ int moverDisco(Pino **pinos, int pinoOrigem, int pinoDestino){
 }
 
 void imprimir(Pino **pinos, int numPinos, int numDiscos){
-  
+  /*
+  Esta função imprime os pinos e discos baseando-se na renderizão em matriz.
+  Sendo cada ixj um pixel do desenho.
+  A função realiza um calculo para descobrir o numero de linhas e colunas dessa matriz, além de identificar a partir de qual linha a matriz conterá discos.
+
+         haste
+   _ _ _ _ _ _ _ _ _ _   
+  |        |         |   ~~~
+  |        |         |    |
+  |     ___|___      | tamHaste -> linha tem disco  | checa-se o tamanho do
+  |   _____|_____    |    |     -> linha tem disco  | disco para printar
+  |________|_________|   ~~~
+  <----- tamBase ---->
+  */
+
   Disco *disco;
   int numDiscosPino, linhaTemDisco, colunaHaste;
   int tamBase, tamHaste, tamDisco;
