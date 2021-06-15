@@ -55,25 +55,6 @@ bool checaVitoria(Pino **pinos, int n){
   return false;
 }
 
-void aux(int n, Pino **pinos){
-
-  Disco *discoTop, *nextDisco;
-
-  for(int i = 0; i < n; i++){
-    printf("Numero de discos no pino %d: %c\n", i + 1, pinos[i] -> numDiscos);
-    if(pinos[i] -> numDiscos != '0'){
-      discoTop = pinos[i] -> top;
-      printf("%c\n", discoTop -> TamDisco);
-      nextDisco = discoTop ->next;
-      for(int j = 1; j < (pinos[i] -> numDiscos) - '0'; j++){
-        printf("%c\n", nextDisco -> TamDisco);
-        nextDisco = nextDisco ->next;
-      }
-
-    }
-  }
-}
-
 int main(void) {
   int numPinos, numDiscos;
   int pinoOrigem, pinoDestino;
