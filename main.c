@@ -2,6 +2,8 @@
 #include <stdbool.h>
 #include "TorreDeHanoi.h"
                          
+int totalJogadas = 0;
+
 int validaEntrada(char c){
   int n;
   if(c == 'p') printf("Insira a quantidade de pinos: [3..5] ");
@@ -18,6 +20,7 @@ bool validaMovimento(int n, int a, int b){
   if( a != b && (b >= 1 && b <= n) && (a >= 1 && a <= n)){
     return true;
   }
+  printf("Movimento invalido\n");
   return false;
 }
 
@@ -40,18 +43,73 @@ Pino** iniciaJogo(int n, int m){
   return pinos;
 }
 
+bool checaVitoria(Pino **pinos, int n){
+  char numDiscos =  n + '0';
+  if(pinos[0] -> numDiscos == '0'){
+    for(int i = 1; i < n; i++){
+      if(pinos[i] -> numDiscos == numDiscos){
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+void aux(int n, Pino **pinos){
+
+  Disco *discoTop, *nextDisco;
+
+  for(int i = 0; i < n; i++){
+    printf("Numero de discos no pino %d: %c\n", i + 1, pinos[i] -> numDiscos);
+    if(pinos[i] -> numDiscos != '0'){
+      discoTop = pinos[i] -> top;
+      printf("%c\n", discoTop -> TamDisco);
+      nextDisco = discoTop ->next;
+      for(int j = 1; j < (pinos[i] -> numDiscos) - '0'; j++){
+        printf("%c\n", nextDisco -> TamDisco);
+        nextDisco = nextDisco ->next;
+      }
+
+    }
+  }
+}
 
 int main(void) {
-  int n, m;
-  Pino **pinos;
+  int numPinos, numDiscos;
+  int pinoOrigem, pinoDestino;
 
-  n = validaEntrada('p');
-  m = validaEntrada('d');
+  Pino **pinos;
+  Disco *discoTop;
+
+  numPinos = validaEntrada('p');
+  numDiscos = validaEntrada('d');
   
-  pinos = iniciaJogo(n, m);
+  pinos = iniciaJogo(numPinos, numDiscos);
   
-  imprimir(pinos, n, m);
+  imprimir(pinos, numPinos, numDiscos);
   
+  while(!checaVitoria(pinos, numDiscos)){
+    printf("Insira os pinos de origem e de destino: ");
+    scanf("%d %d", &pinoOrigem, &pinoDestino);
   
+
+    if(validaMovimento(numPinos, pinoOrigem, pinoDestino)){
+
+      pinoOrigem--;
+      pinoDestino--;
+
+      if(moverDisco(pinos, pinoOrigem, pinoDestino)){
+        
+        discoTop = pop(pinos[pinoOrigem]);
+        push(pinos[pinoDestino], discoTop);
+        totalJogadas++;
+
+      }
+
+    }
+    imprimir(pinos, numPinos, numDiscos);
+  }
+  printf("PARABENS VOCE CONSEGUIU\n");
+  printf("TOTAL DE JOGADAS: %d\n", totalJogadas);
   return 0;
 }
